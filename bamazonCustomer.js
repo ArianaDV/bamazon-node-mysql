@@ -23,7 +23,7 @@ function afterConnection() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     for (var i = 0; i < res.length; i++) {
-    	console.log("Product ID: " + res[i].id + " Item: " + res[i].product_name + " Price: " + res[i].product_price);
+    	console.log("Product ID: " + res[i].id + " Item: " + res[i].product_name + " Price: " + res[i].product_price + " Quantity: " + res[i].quantity);
      }
     shop();
     
@@ -37,7 +37,6 @@ function shop(){
       name: "id",
       type: "input",
       message: "What would you like to purchase? Enter ID #.",
-      // choices: ["POST", "BID"]
     },
     {
       name: "units",
@@ -55,10 +54,36 @@ function shop(){
     		if(err) throw err;
     		
     		else if (answer.units > res[0].quantity){
+    			console.log("---------------------");
     			console.log("Insufficient quantity!");
-    		}   		
-    			
-    	})
+    			console.log("---------------------");
+    		}else {
+    			var newQuantity = res[0].quantity - answer.units
+    			var totalCost = res[0].product_price * answer.units
+    			connection.query(
+				"UPDATE products SET ? WHERE ?",
+				[
+			     {
+			        quantity: newQuantity
+			      },
+			      {
+			        id: answer.id
+			      }
+			    ],
+			    function(err, res) {
+			      console.log("---------------------");
+			      console.log("Your items are in your shopping cart! Your total is: " + totalCost);
+			      console.log("---------------------");
+			      
+			  		afterConnection();
+			    }
+			 );
+		 }			   		
+    		
+   	})
  	
    });
 }
+
+
+
