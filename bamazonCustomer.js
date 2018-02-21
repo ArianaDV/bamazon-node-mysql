@@ -24,10 +24,9 @@ function afterConnection() {
     if (err) throw err;
     for (var i = 0; i < res.length; i++) {
     	console.log("Product ID: " + res[i].id + " Item: " + res[i].product_name + " Price: " + res[i].product_price);
-    
-    }
+     }
     shop();
-    // connection.end();
+    
   });
 }
 
