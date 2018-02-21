@@ -10,7 +10,7 @@ Enter 'node bamazonCustomer.js' into the terminal and press enter.
 Once the app is initiated, it will display the items available for purchase.
 ![initiate](images/Display_items.png)
 
-It will then prompt the user to enter the ID of the product they wish to purchase, as well as the # of units.
+It will then prompt you to enter the ID of the product you wish to purchase, as well as the # of units.
 
 ![initiate](images/Enter_info.png)
 
