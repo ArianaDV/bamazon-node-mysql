@@ -15,7 +15,6 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId);
   afterConnection();
 });
 
@@ -37,11 +36,23 @@ function shop(){
       name: "id",
       type: "input",
       message: "What would you like to purchase? Enter ID #.",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
     },
     {
       name: "units",
       type: "input",
       message: "How many units would you like to purchase?",
+      validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
     }
     ])
     .then(function(answer) {
@@ -60,8 +71,8 @@ function shop(){
     			console.log("---------------------");
     		}else 
     		{
-    			var newQuantity = res[0].quantity - answer.units
-    			var totalCost = res[0].product_price * answer.units
+    			var newQuantity = (res[0].quantity - answer.units);
+    			var totalCost = (res[0].product_price * answer.units).toFixed(2);
     			connection.query(
 				"UPDATE products SET ? WHERE ?",
 				[
