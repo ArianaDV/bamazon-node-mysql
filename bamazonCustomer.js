@@ -69,6 +69,7 @@ function shop(){
     			console.log("---------------------");
     			console.log("Insufficient quantity!");
     			console.log("---------------------");
+          afterConnection();
     		}else 
     		{
     			var newQuantity = (res[0].quantity - answer.units);
