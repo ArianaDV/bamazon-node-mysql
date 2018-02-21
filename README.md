@@ -1,5 +1,3 @@
-# bamazon-node-mysql
+<h2> Bamazon: NODE.JS + SQL </h2>
 
-<h1> Bamazon: NODE.JS + SQL </h1>
-
-screenshots.png
+![screenshot](screenshots.png)
