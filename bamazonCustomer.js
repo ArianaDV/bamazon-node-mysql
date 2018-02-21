@@ -10,48 +10,56 @@ var connection = mysql.createConnection({
 
   // Your password
   password: "Cocochanel12",
-  database: "bamazon"
+  database: "bamazon_db"
 });
 
 connection.connect(function(err) {
   if (err) throw err;
-  // console.log("connected as id " + connection.threadId);
-  displayItems();
+  console.log("connected as id " + connection.threadId);
+  afterConnection();
 });
 
-
-
-function displayItems(){
-	console.log("Selecting all products...\n");	
-	connection.query("SELECT * FROM products", function(err, res) {
+function afterConnection() {
+  connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
-    // Log all results of the SELECT statement
-    console.log(res);
+    for (var i = 0; i < res.length; i++) {
+    	console.log("Product ID: " + res[i].id + " Item: " + res[i].product_name + " Price: " + res[i].product_price);
+    
+    }
+    shop();
     // connection.end();
+  });
+}
 
-inquirer.
-	prompt([
-	{
-		name:"id",
-		type: "input",
-		message:"Enter ID of item you would like to purchase:"
-	},
-	{	
-		name: "units",
-		type: "input",
-		message: "How many would you like to purchase?",
-		validate: function(value) {
-          if (isNaN(value) === false) {
-            return true;
-          }
-          return false;
-        }
-	}	
-])
-.then(function(answer){
-	console.log(`You purchased ${answer.id}`);
-	var chosenItem;
-	});
-	
-	})
+function shop(){
+	inquirer
+    .prompt([
+    {
+      name: "id",
+      type: "input",
+      message: "What would you like to purchase? Enter ID #.",
+      // choices: ["POST", "BID"]
+    },
+    {
+      name: "units",
+      type: "input",
+      message: "How many units would you like to purchase?",
+    }
+    ])
+    .then(function(answer) {
+    	connection.query(
+    		"SELECT * FROM products WHERE ?", 
+    		{
+    			id: answer.id
+    		}, 
+    		function(err, res){
+    		if(err) throw err;
+    		
+    		else if (answer.units > res[0].quantity){
+    			console.log("Insufficient quantity!");
+    		}   		
+    			
+    	})
+ 	
+   });
 }
