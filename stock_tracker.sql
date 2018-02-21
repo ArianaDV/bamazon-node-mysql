@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS bamazon_db;
+DROP DATABASE bamazon_db;
 CREATE DATABASE bamazon_db;
 
 USE bamazon_db;
@@ -13,6 +13,11 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, product_price, quantity)
-VALUES ("Belvita", "Groceries", 4.99, 50), ("Make Up Removing Wipes", "Health and Beauty", 5.99, 70), ("Greenies Dental Sticks", "Pets", 39.99, 20);
-
--- SELECT * FROM products;
+VALUES 
+("Belvita Biscuits", "Groceries", 4.99, 100), 
+("Make Up Removing Wipes", "Health and Beauty", 5.99, 150), 
+("Greenies Dental Sticks", "Pets", 39.99, 80), 
+("Eggs", "Food", 1.99, 100), 
+("Rainboots", "Shoes", 29.99, 20),
+("Flaming Hot Cheetos", "Food", 1.99, 200),
+("Speaker", "Electronics", 32.34, 300);

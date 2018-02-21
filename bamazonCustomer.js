@@ -53,11 +53,13 @@ function shop(){
     		function(err, res){
     		if(err) throw err;
     		
-    		else if (answer.units > res[0].quantity){
+    		else if (answer.units > res[0].quantity)
+    		{
     			console.log("---------------------");
     			console.log("Insufficient quantity!");
     			console.log("---------------------");
-    		}else {
+    		}else 
+    		{
     			var newQuantity = res[0].quantity - answer.units
     			var totalCost = res[0].product_price * answer.units
     			connection.query(
@@ -72,15 +74,15 @@ function shop(){
 			    ],
 			    function(err, res) {
 			      console.log("---------------------");
-			      console.log("Your items are in your shopping cart! Your total is: " + totalCost);
+			      console.log("Your items are in your shopping cart! Your total for this item is: " + totalCost);
 			      console.log("---------------------");
 			      
 			  		afterConnection();
-			    }
-			 );
-		 }			   		
+			    	}
+			 	);
+			}			   		
     		
-   	})
+   		})
  	
    });
 }
